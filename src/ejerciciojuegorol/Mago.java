@@ -4,23 +4,21 @@ package ejerciciojuegorol;
 import java.util.Random;
 
 
-public class Mago {
+public class Mago extends Jugador {
     
     Random aleatorio = new Random();
     
-    private int ataque;    
-    public String nombre;
-    public int vida = 100;    
-    private int minPower = 10;
-    private int maxPower = 25;
+    private int ataque;
+    private int danio;
     
     public Mago (String nombre){
-        this.nombre = nombre;
+        
+        super(nombre);
+        
     }
     
-    
     public int atacar(){
-        this.ataque = aleatorio.nextInt(((20 - 1 + 1) + 1) - 1);        
+        this.ataque = aleatorio.nextInt((20 - 1) + 1) + 1;        
         return this.ataque; 
     }
     
@@ -28,12 +26,21 @@ public class Mago {
         return ataque;
     }
     
-    public int golpe (){        
-        if (this.ataque >= 20){            
-            return maxPower;                       
+    public int golpear (){        
+        if ((this.ataque - 1) >= 20){            
+            this.maxPower = aleatorio.nextInt((28 - 20)+1)+20;
+            this.danio = this.maxPower;
+            return this.danio;
         }
         else {            
-            return minPower;           
+            this.minPower = aleatorio.nextInt((15 - 10)+1)+10;
+            this.danio= this.minPower;
+            return this.danio;
         }        
-    }    
+    }
+    
+    public String toString(){
+        String mensaje = "El jugador: " +this.nombre+ " ha hecho " +this.danio+ " de daño.";
+        return mensaje;
+    }
 }

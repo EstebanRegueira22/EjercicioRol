@@ -4,23 +4,31 @@ package ejerciciojuegorol;
 import java.util.Random;
 
 
-public class Arquero{
+public class Arquero extends Jugador{
     
     Random aleatorio = new Random();
     
-    private int ataque;    
-    public String nombre;
-    public int vida = 100;    
-    private int minPower = 5;
-    private int maxPower = 15;
-    
-    public Arquero (String nombre){
-        this.nombre = nombre;
+    private int ataque;
+    private int danio;
+        
+    public Arquero (String nombre){        
+        super(nombre);        
+    }
+    /**
+    public int minPower(){
+        this.minPower = aleatorio.nextInt(10);        
+        return this.minPower;
     }
     
     
+    public int maxPower(){
+        this.maxPower = aleatorio.nextInt(20);        
+        return this.maxPower;
+    }
+    **/
+    
     public int atacar(){
-        this.ataque = aleatorio.nextInt((20 - 1 + 1) + 1) + 3;        
+        this.ataque = aleatorio.nextInt((20 - 1) + 1) + 1;        
         return this.ataque; 
     }
     
@@ -28,13 +36,21 @@ public class Arquero{
         return ataque;
     }
     
-    public int golpe (){                
-        if (this.ataque >= 20){            
-            return maxPower;          
+    public int golpear (){        
+        if ((this.ataque + 2) >= 20){            
+            this.maxPower = aleatorio.nextInt((20 - 15)+1)+15;
+            this.danio = this.maxPower;
+            return this.danio;
         }
         else {            
-           return minPower;                       
+            this.minPower = aleatorio.nextInt((10 - 5)+1)+5;
+            this.danio = this.minPower;
+            return this.danio;
         }        
     }
-
+    
+    public String toString(){
+        String mensaje = "El jugador: " +this.nombre+ " ha hecho " +this.danio+ " de daño.";
+        return mensaje;
+    }
 }
